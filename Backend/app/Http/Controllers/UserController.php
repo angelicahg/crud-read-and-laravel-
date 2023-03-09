@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+// use App\Models\User;
 
 class UserController extends Controller
 {
@@ -31,11 +31,11 @@ class UserController extends Controller
         User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'password'=> bcrypt($request->password),
             
 
         ]);
-        return response()->json(('succesful'))
+        return response()->json(('succesful'));
     }
 
     /**
@@ -75,6 +75,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::whereId($id)->first()->delete();
+        return response()->json('sucess');
     }
 }

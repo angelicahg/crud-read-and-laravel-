@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class UserController extends Controller
@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(User::get());
+        return response()->json(User::latest()->get());
     }
 
     /**
@@ -28,7 +28,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            
+
+        ]);
+        return response()->json(('succesful'))
     }
 
     /**
@@ -44,7 +51,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return response()->json(User::whereId($id)->first());  
     }
 
     /**
@@ -52,7 +59,15 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::whereId($id)->first());
+        $user->update(
+            [
+            'name'=>$request->name,
+            'email'=>$request->email,
+            
+            ]
+            return response()-json('ok');
+        )
     }
 
     /**

@@ -79,3 +79,4 @@ class UserController extends Controller
         return response()->json('sucess');
     }
 }
+//actualizacion de repositorio para carpeta front 
